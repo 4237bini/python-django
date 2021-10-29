@@ -1,0 +1,388 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block styles %}
+
+<!-- Slick css -->
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/slick.css' %}" />
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/crumbs.css' %}">
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/specification.css' %}">
+
+
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="page-content">
+
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-5 mt-3">
+				<ul class="breadcrumb breadcrumb-items ">
+					<li>
+						<a href="{% url 'home' %}">Home</a>
+					</li>
+					<li>
+						<a href="#">Gadget</a>
+					</li>
+					
+					<li class="active">
+						<span>{{ smartwatch.name }}</span>
+					</li>
+					
+					
+					
+
+				</ul>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-5">
+
+				<div class="images">
+					<div class="slider" style="margin-top:20px;"><img src="{{ smartwatch.image1.url }}"
+							alt="img/Xiaomi Redmi 7A.png">
+
+					</div>
+					<div class="slider-img">
+
+						<div class="img"><a href="{{ smartwatch.image1.url }}" target="slider"><img
+                                    src="{{ smartwatch.image1s.url }}"></a>
+                        </div>
+                        
+					</div>
+				</div>
+
+			</div>
+            
+			<div class="col-md-7" style="margin-bottom: 50px; margin-top: 20px;">
+                
+		    
+				<h1>{{ smartwatch.name }}</h1>
+				
+				
+			
+				
+				
+                
+				<div class="review-rating1" style="margin-bottom: 10px;">
+					<span><i
+						class="fa fa-star{% if smartwatch.averageRatings < 1 %}-o empty{% endif %}"></i></span>
+				<span><i
+						class="fa fa-star{% if smartwatch.averageRatings < 2 %}-o empty{% endif %}"></i></span>
+				<span><i
+						class="fa fa-star{% if smartwatch.averageRatings < 3 %}-o empty{% endif %}"></i></span>
+				<span><i
+						class="fa fa-star{% if smartwatch.averageRatings < 4 %}-o empty{% endif %}"></i></span>
+				<span><i
+						class="fa fa-star{% if smartwatch.averageRatings < 5 %}-o empty{% endif %}"></i></span>
+				</div>
+                
+				<div class="title">
+					Specifications
+				</div>
+				
+				<div class="spec-details">
+					<table width="100%">
+						<tbody>
+							<tr>
+								<td width="15">Design </td>
+                                <td width="151">{{ smartwatch.design }}</td>
+                            
+							</tr>
+							<tr>
+								<td>Display</td>
+								<td>{{ smartwatch.display }}</td>
+							</tr>
+							<tr>
+								<td>Activity Tracker </td>
+								<td>{{ smartwatch.activityTracker }}</td>
+							</tr>
+							<tr>
+								<td>Sensor</td>
+								<td>{{ smartwatch.sensor }}</td>
+							</tr>
+							<tr>
+								<td>Memory</td>
+								<td>{{ smartwatch.memory }}</td>
+							</tr>
+							<tr>
+								<td>Battery</td>
+								<td>{{ smartwatch.battery }}</td>
+							</tr>
+							<tr>
+								<td>Price in Nepal (Rs.)</td>
+								<td>{{ smartwatch.price }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+            
+				<div class="row">
+					<div class="col-md-12">
+
+						<div class="product-reviews">
+							<div class="title">
+								Reviews
+							</div>
+
+							<div id="carousel" class="slider1">
+								<div class="slider-item">
+									{% for rs in smartwatchdetail %}
+									<div class="single-review">
+										<div class="review-rating">
+											<span><i
+													class="fa fa-star{% if rs.ratings < 1 %}-o empty{% endif %}"></i></span>
+											<span><i
+													class="fa fa-star{% if rs.ratings < 2 %}-o empty{% endif %}"></i></span>
+											<span><i
+													class="fa fa-star{% if rs.ratings < 3 %}-o empty{% endif %}"></i></span>
+											<span><i
+													class="fa fa-star{% if rs.ratings < 4 %}-o empty{% endif %}"></i></span>
+											<span><i
+													class="fa fa-star{% if rs.ratings < 5 %}-o empty{% endif %}"></i></span>
+										</div>
+
+										<div class="review-heading" style="display: flex;">
+											<div><i class="fa fa-user"></i>&nbsp;{{ rs.user.username }}</div>
+											<div><i class="fa fa-clock-o"></i>&nbsp;{{ rs.create_at }}</div>
+										</div>
+
+										<div class="review-body">
+											<p>{{ rs.review }}</p>
+										</div>
+										<div class="votes">
+											<button id="likebtn"><i class="fa fa-thumbs-up"></i></button>
+											<input type="number" name="" value="0">
+											<button id="dislikebtn"><i class="fa fa-thumbs-down"></i></button>
+											<input type="number" name="" value="0">
+										</div>
+									</div>
+								    {% endfor %}
+									<div class="single-review">
+										<div class="review-rating">
+											<span><i class="fa fa-star"></i></span>
+											<span><i class="fa fa-star"></i></span>
+											<span><i class="fa fa-star"></i></span>
+											<span><i class="fa fa-star"></i></span>
+											<span><i class="fa fa-star"></i></span>
+										</div>
+										<div class="review-heading" style="display: flex;">
+
+											<div><i class="fa fa-user"></i>&nbsp;Daisy</div>
+											<div><i class="fa fa-clock-o"></i> 7 OCT 2020 / 11 AM</div>
+
+
+										</div>
+
+										<div class="review-body">
+											<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam
+												dignissimos natus at, adipisci exercitationem praesentium dolorum
+												deserunt similique quibusdam, vitae sit, quae id obcaecati quas
+												consequuntur. Quidem ipsa illum praesentium?</p>
+										</div>
+										<div class="votes">
+											<button id="likebtn"><i class="fa fa-thumbs-up"></i></button>
+											<input type="number" name="likes" value="0">
+											<button id="dislikebtn"><i class="fa fa-thumbs-down"></i></button>
+											<input type="number" name="dislikes" value="0">
+										</div>
+									</div>
+
+
+								</div>
+
+								<div class="slider-item">
+									<div class="single-review">
+
+										<div class="review-rating">
+											<span><i class="fa fa-star"></i></span>
+											<span><i class="fa fa-star"></i></span>
+											<span><i class="fa fa-star"></i></span>
+											<span><i class="fa fa-star"></i></span>
+											<span><i class="fa fa-star"></i></span>
+										</div>
+										<div class="review-heading" style="display: flex;">
+											<div><i class="fa fa-user"></i>&nbsp;Sweety</div>
+											<div><i class="fa fa-clock-o"></i> 7 OCT 2020 / 11 AM</div>
+
+										</div>
+
+										<div class="review-body">
+											<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam
+												dignissimos natus at, adipisci exercitationem praesentium dolorum
+												deserunt similique quibusdam, vitae sit, quae id obcaecati quas
+												consequuntur. Quidem ipsa illum praesentium?</p>
+										</div>
+										<div class="votes">
+											<button id="likebtn"><i class="fa fa-thumbs-up"></i></button>
+											<input type="number" name="likes" value="0">
+											<button id="dislikebtn"><i class="fa fa-thumbs-down"></i></button>
+											<input type="number" name="dislikes" value="0">
+										</div>
+									</div>
+
+									<div class="single-review">
+										<div class="review-rating">
+											<span><i class="fa fa-star"></i></span>
+											<span><i class="fa fa-star"></i></span>
+											<span><i class="fa fa-star"></i></span>
+											<span><i class="fa fa-star"></i></span>
+											<span><i class="fa fa-star"></i></span>
+										</div>
+										<div class="review-heading" style="display: flex;">
+
+											<div><i class="fa fa-user"></i>&nbsp;David</div>
+											<div><i class="fa fa-clock-o"></i> 7 OCT 2020 / 11 AM</div>
+
+
+										</div>
+
+										<div class="review-body">
+											<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam
+												dignissimos natus at, adipisci exercitationem praesentium dolorum
+												deserunt similique quibusdam, vitae sit, quae id obcaecati quas
+												consequuntur. Quidem ipsa illum praesentium?</p>
+										</div>
+										<div class="votes">
+											<button id="likebtn"><i class="fa fa-thumbs-up"></i></button>
+											<input type="number" name="likes" value="0">
+											<button id="dislikebtn"><i class="fa fa-thumbs-down"></i></button>
+											<input type="number" name="dislikes" value="0">
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<i class="fa fa-angle-double-left prev1" aria-hidden="true"></i>
+							<i class="fa fa-angle-double-right next1" aria-hidden="true"></i>
+
+
+						</div>
+					</div>
+
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+
+
+						<div class="reviews-form">
+
+
+							<h5 style="font-weight:600; font-size:18px;">Write your review</h5>
+
+							{% if messages %}
+							{% for message in messages %}
+							<div class="alert alert-{{message.tags}}" roles="alert">
+								{{ message }}
+
+							</div>
+							{% endfor %}
+							{% endif %}
+
+
+
+							<form action="/gadget/addsmartwatchrating/{{ smartwatch.id }}" method="POST"
+								class="review-form">
+								{% csrf_token %}
+								<div class="form-group" style="display: flex;">
+
+									<textarea name="review" class="input" cols="45"
+										placeholder="Your Review"></textarea>
+								</div>
+
+								<!-- <div class="form-group">
+									<label for="Ratings"> Your rating</label>
+									<input class="form-control" type="number" name="ratings" id="ratings" placeholder="Your rating"
+										required />
+								</div> -->
+								<div class="form-group">
+									<div class="input-rating" style="display: flex;">
+										<strong class="text" style="font-size: 15px;">Your Rating : </strong>
+										<div class="stars">
+											<input type="radio" name="ratings" id="rate-5" value="5">
+											<label for="rate-5" class="fa fa-star"></label>
+											<input type="radio" name="ratings" id="rate-4" value="4">
+											<label for="rate-4" class="fa fa-star"></label>
+											<input type="radio" name="ratings" id="rate-3" value="3">
+											<label for="rate-3" class="fa fa-star"></label>
+											<input type="radio" name="ratings" id="rate-2" value="2">
+											<label for="rate-2" class="fa fa-star"></label>
+											<input type="radio" name="ratings" id="rate-1" value="1">
+											<label for="rate-1" class="fa fa-star"></label>
+
+
+										</div>
+
+									</div>
+
+								</div>
+								{% if user.id is not None %}
+								<button type="submit" class="btn btn-outline-primary">Add Review</button>
+								{% else %}
+								You must be logged in first
+								{% endif %}
+
+							</form>
+						</div>
+					</div>
+
+
+
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</div>
+
+
+
+{% endblock %}
+
+{% block scripts %}
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('.slider-img a').mouseover(function (e) {
+			e.preventDefault();
+			$('.slider img').attr("src", $(this).attr("href"));
+		})
+	})
+	var letters = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+	$('.slider1').slick({
+
+		infinite: false,
+		speed: 300,
+		slidesToShow: 1,
+		adaptiveHeight: true,
+
+		nextArrow: $('.next1'),
+		prevArrow: $('.prev1'),
+		dots: true,
+		customPaging: function (slider, i) {
+			var thumb = $(slider.$slides[i]).data();
+			return '<a>' + letters[i] + '</a>';
+		}
+	});
+
+
+</script>
+
+{% endblock %}

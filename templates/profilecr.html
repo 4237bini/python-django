@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+<!------ Include the above in your HEAD tag ---------->
+{% endblock %}
+
+
+{% block content %}
+<div class="container emp-profile">
+    
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img src="{{ userprofile.profileimage.url }}" height=100  width=100
+                        alt="" />
+                    <!-- <div class="file btn btn-lg btn-primary">
+                        Change Photo
+                        <input type="file" name="file" />
+                    </div> -->
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h4>&nbsp;<i class="fa fa-user"></i>&nbsp;
+                        {% if user.is_authenticated %}
+                        {{user.username}}
+                        {% endif %}
+                    </h4>
+                    
+                    <h5>&nbsp;<i class="fas fa-laptop-code"></i>&nbsp;
+                        {{ userprofile.profession }}
+                    </h5>
+                    
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                aria-controls="home" aria-selected="true">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                                aria-controls="profile" aria-selected="false">Timeline</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <a href="{% url 'home' %}" class="close">x</a>
+                <input class="profile-edit-btn" name="btnAddMore" value="Edit Profile" onclick="location.href='/account/adduserprofile/{{ user.id }}'">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+               
+                    
+               
+               
+                <!--<div class="profile-work">
+                    <p>WORK LINK</p>
+                    <a href="">Website Link</a><br />
+                    <a href="">Bootsnipp Profile</a><br />
+                    <a href="">Bootply Profile</a>
+                    <p>SKILLS</p>
+                    
+                    
+                    <a href="">Web Developer</a><br />
+                    <a href="">Database</a><br />
+                    <a href="">ECommerce</a><br />
+                    <a href="">Software Developer</a><br />
+                    <a href="">Research</a><br />
+                </div>-->
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Firstname</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{ userprofile.firstname }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Lastname</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{ userprofile.lastname }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Email</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{ userprofile.email }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Phone</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{ userprofile.phone }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Address</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{ userprofile.address }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Experience</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{ userprofile.experience }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Profession</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{ userprofile.professison }}</p>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Total Projects</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{ userprofile.total }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Your Bio</label><br />
+                                <p>{{ userprofile.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+ 
+</div>
+{% endblock %}

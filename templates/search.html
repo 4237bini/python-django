@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+{% block title %} {{ query }} results {% endblock %}
+
+{% load static %}
+
+{% block styles %}
+
+<!-- Slick css -->
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/slick.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'css/specification.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+
+<style>
+	.btn-outline-primary{
+		outline: none;
+		border:none;
+
+	}
+	.btn-outline-primary:hover,
+	.btn-outline-primary:focus {
+		box-shadow: 0 8px 6px -6px #004e64;
+	}
+	
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+<!-- MAIN CONTENT -->
+<!-- BREADCRUMB -->
+<div class="page-content">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-5 mt-3">
+                <ul class="breadcrumb breadcrumb-items ">
+                    <li>
+                        <a href="{% url 'home' %}">Home</a>
+                    </li>
+
+                    <li class="active">
+                        <span>&nbsp;&nbsp;{{ query }}&nbsp;</span>
+                    </li>
+
+
+
+
+                </ul>
+            </div>
+        </div>
+
+
+        
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="order-summary clearfix">
+                    <div class="section-title">
+                        <h3 class="title">Product List</h3>
+                    </div>
+                    <table class="search-table table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th></th>
+
+                                <th class="text-center">Price</th>
+
+
+                                <th class="text-right"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                                {% for smartphone in smartphone %}
+                            <tr>
+                                <td class="thumb"><a href="/gadget/smartphonedetail/{{ smartphone.id }}">
+                                        <img src="{{ smartphone.image.url }}" alt="" style="height: 100px">
+                                    </a></td>
+
+                                <td class="details"> <a href="/gadget/smartphonedetail/{{ smartphone.id }}">{{ smartphone.name }}
+                                            </a> </td>
+
+                                <td class="price text-center"><strong>{{ smartphone.price }}</strong></td>
+
+
+
+                            </tr>
+                                {% endfor %}
+
+                                {% for smartwatch in smartwatch %}
+                             <tr>
+                                    <td class="thumb"><a href="/gadget/smartwatchdetail/{{ smartwatch.id }}">
+                                            <img src="{{ smartwatch.image.url }}" alt="" style="height: 100px">
+                                        </a></td>
+    
+                                    <td class="details"> <a href="/gadget/smartwatchdetail/{{ smartwatch.id }}">{{ smartwatch.name }}
+                                                </a> </td>
+    
+                                    <td class="price text-center"><strong>{{ smartwatch.price }}</strong></td>
+    
+    
+    
+                             </tr>
+                                {% endfor %}
+                                {% for laptop in laptop %}
+                             <tr>
+                                    <td class="thumb"><a href="/gadget/laptopdetail/{{ laptop.id }}">
+                                            <img src="{{ laptop.image.url }}" alt="" style="height: 100px">
+                                        </a></td>
+    
+                                    <td class="details"> <a href="/gadget/laptopdetail/{{ laptop.id }}">{{ laptop.name }}
+                                                </a> </td>
+    
+                                    <td class="price text-center"><strong>{{ laptop.price }}</strong></td>
+    
+    
+    
+                             </tr>
+                                {% endfor %}    
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+        
+    </div>
+
+</div>        
+
+
+
+
+    
+
+
+{% endblock %}
+
+{% block scripts %}
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('.slider-img a').mouseover(function (e) {
+			e.preventDefault();
+			$('.slider img').attr("src", $(this).attr("href"));
+		})
+	})
+	var letters = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+	$('.slider1').slick({
+
+		infinite: false,
+		speed: 300,
+		slidesToShow: 1,
+		adaptiveHeight: true,
+
+		nextArrow: $('.next1'),
+		prevArrow: $('.prev1'),
+		dots: true,
+		customPaging: function (slider, i) {
+			var thumb = $(slider.$slides[i]).data();
+			return '<a>' + letters[i] + '</a>';
+		}
+	});
+
+
+</script>
+{% endblock %}

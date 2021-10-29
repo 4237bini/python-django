@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+<!------ Include the above in your HEAD tag ---------->
+{% endblock %}
+
+
+{% block content %}
+<div class="container emp-profile">
+    <form method="post" action="/account/adduserprofile/{{ user.id }}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    
+                  <img src="{% static 'img/profiledefault.png' %}" height=100  width=100 alt="" /> 
+                        
+                        <div class="file btn btn-lg btn-primary">
+                        
+                            <input type="file" name="profileimage" alt="your pic here"/>
+                                    Change Photo
+                        
+                        
+                       </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5>&nbsp;<i class="fa fa-user"></i>
+                        {% if user.is_authenticated %}
+                        {{user.username}}
+                        {% endif %}
+                    </h5>
+    
+                    
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                aria-controls="home" aria-selected="true">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                                aria-controls="profile" aria-selected="false">Timeline</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <a href="{% url 'home' %}" class="close">x</a>
+                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Save" />
+                
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <!--<div class="profile-work">
+                    <p>WORK LINK</p>
+                    <a href="">Website Link</a><br />
+                    <a href="">Bootsnipp Profile</a><br />
+                    <a href="">Bootply Profile</a>
+                    <p>SKILLS</p>
+                    <a href="">Web Designer</a><br />
+                    <a href="">Web Developer</a><br />
+                    <a href="">WordPress</a><br />
+                    <a href="">WooCommerce</a><br />
+                    <a href="">PHP, .Net</a><br />
+                </div>-->
+            </div> 
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Firstname</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p><input class="form-control" type="text" name="firstname" id="firstname" placeholder="Firstname"
+                                    required /></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Lastname</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p><input class="form-control" type="text" name="lastname" id="lastname" placeholder="Lastname"
+                                    required /></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Email</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p><input class="form-control" type="text" name="email" id="email" placeholder="abc@def.com"
+                                    required /></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Phone</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p><input class="form-control" type="number" name="phone" id="phone" placeholder="Phone"
+                                    required /></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Address</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p><input class="form-control" type="text" name="address" id="address" placeholder="Address"
+                                    required /></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                      <div class="row">
+                            <div class="col-md-6">
+                                <label>Experience</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p><input class="form-control" type="text" name="experience" id="experience" placeholder="Experience"
+                                    required /></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Profession</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p><input class="form-control" type="text" name="profession" id="profession" placeholder="Profession"
+                                    required /></p>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Total Projects</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p><input class="form-control" type="number" name="total" id="total" placeholder="Total Major Projects"
+                                    required /></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Your Bio</label><br />
+                                <p><input class="form-control" type="text" name="description" id="description" placeholder="Your detail description"
+                                    required /></p>
+                            </div>
+                        </div>
+
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    
+</div>
+
+{% endblock %}

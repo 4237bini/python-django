@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block styles %}
+<!-- Slick css -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/slick.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'css/subpages.css' %}">
+
+{% endblock %}
+{% block content %}
+
+<!-- MAIN CONTENT -->
+
+	 <div class="page-content">
+		<div class="container">
+			<div class="row" style="column-count: 2; column-gap:20px;">
+				<div class="col-md-3 phone-finder-box">
+					<div class="brand-box">
+						<form method="GET" id="phone-finder-form">
+							{% csrf_token %}
+							<div class="brand-top">
+								<h6>BRANDS</h6>
+								
+							</div>
+							<div id="brand-selection">
+								<div class="btnradio">
+									<label>
+										<input type="radio" name="brands" >
+										<span><img src="{% static 'img/app.png' %}"></span>
+									</label>
+								</div>
+								
+								<div class="btnradio">
+									<label>
+										<input type="radio" name="brands" >
+										<span><img src="{% static 'img/sam.png' %}"></span>
+									</label>
+								</div>
+								
+								<div class="btnradio">
+									<label>
+										<input type="radio" name="brands" >
+										<span><img src="{% static 'img/acer.png' %}"></span>
+									</label>
+								</div>
+								<div class="btnradio">
+									<label>
+										<input type="radio" name="brands" >
+										<span><img src="{% static 'img/lenovo.png' %}"></span>
+									</label>
+								</div>
+								<div class="btnradio">
+									<label>
+										<input type="radio" name="brands" >
+										<span><img src="{% static 'img/dell.png' %}"></span>
+									</label>
+								</div>
+								
+							</div>
+							
+						</form>
+					</div>
+
+					
+				
+
+				<!--CATEGORY SECTION --> <!-- inside col-md-3-->
+				<div class="row">
+					<div class="col-md-12 mt-3">
+						<div class="advertise-2">
+							<a href="https://www.findanlms.com/"><img src="{% static 'img/advs6.jpg' %}" style="width: 275px;"></a>
+
+						</div>
+					</div>
+				</div>
+
+
+				</div>
+
+
+				
+				<!--OPTIONS LIST STARTS-->
+				<div class="col-md-9 page-wrapper" style="width: 73%;
+				    flex: 0 0 73%;max-width: 73%; ">
+					<div class="product-slider">
+						<h5 class="slider-title">Buyer's Guide</h5>
+						<i class="fa fa-angle-left prev1"></i>
+						<i class="fa fa-angle-right next1"></i>
+						
+						<div class="product-wrapper" id="slideshow1">
+                            
+							{% for smartphone in smartphone %}
+							<div class="product">
+	                            
+								<div class="slider-item" onclick="location.href='/gadget/smartphonedetail/{{ smartphone.id }}'">
+									<div class="item-img">
+										<img src="{{ smartphone.image.url }}"/>
+									</div>
+									
+									<div class="title">{{ smartphone.name }}</div>
+									<div class="price">{{ smartphone.price }}</div>
+									
+								</div>
+														
+							</div>
+	                        {% endfor %}
+	
+							
+								
+	
+						</div>
+
+					</div>
+
+					
+
+					
+
+					
+				</div>
+				<!--OPTIONS LIST ENDS-->
+
+			
+			</div>
+		</div>
+			
+		
+	
+	</div> 
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block scripts %}
+
+<!-- JQUERY -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- slick -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+
+<script src="{% static 'js/test.js' %}"></script>
+{% endblock %}

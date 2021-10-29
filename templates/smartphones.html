@@ -1,0 +1,298 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<!-- Slick css -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/slick.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/subpages.css' %}">
+
+
+{% endblock %}
+
+{% block content %}
+
+<!-- MAIN CONTENT -->
+
+	 <div class="page-content">
+		<div class="container">
+			<div class="row" style="column-gap:20px;">
+				<div class="col-md-3 phone-finder-box">
+					<div class="brand-box">
+						<form method="GET" id="phone-finder-form">
+							{% csrf_token %}
+							<div class="brand-top">
+								<h6>BRANDS</h6>
+								
+							</div>
+							<div id="brand-selection">
+								<div class="btnradio">
+									<label>
+										<input type="radio" name="brands" >
+										<span><img src="{% static 'img/app.png' %}"></span>
+									</label>
+								</div>
+								<div class="btnradio">
+									<label>
+										<input type="radio" name="brands" >
+										<span><img src="{% static 'img/Xiaomi.png' %}"></span>
+									</label>
+								</div>
+								<div class="btnradio">
+									<label>
+										<input type="radio" name="brands" > <!-- paddin in mob -->
+										<span><img src="{% static 'img/Realme.png' %}" id="realme"></span>
+									</label>
+								</div>
+								<div class="btnradio">
+									<label>
+										<input type="radio" name="brands" >
+										<span><img src="{% static 'img/sam.png' %}"></span>
+									</label>
+								</div>
+								<div class="btnradio">
+									<label>
+										<input type="radio" name="brands" >
+										<span><img src="{% static 'img/Oppo.png' %}"></span>
+									</label>
+								</div>
+								
+							</div>
+							
+						</form>
+					</div>
+
+				<!--CATEGORY SECTION --> <!-- inside col-md-3-->
+				<div class="row">
+					<div class="col-md-12 mt-3">
+						<div class="advertise-2">
+							<a href="https://www.findanlms.com/"><img src="{% static 'img/advs6.jpg' %}" style="width: 275px;"></a>
+
+						</div>
+					</div>
+				</div>
+
+
+				</div>
+
+				<!--OPTIONS LIST STARTS-->
+				<div class="col-md-9 page-wrapper" style="width: 73%;
+				    flex: 0 0 73%;max-width: 73%; ">
+					<div class="product-slider">
+						{% if user.id is not None %}
+						<h5 class="slider-title">Recommended for You</h5>		
+						{% else %}
+						
+						<h5 class="slider-title">Some popular opinions</h5>
+						{% endif %}
+						<i class="fa fa-angle-left prev1"></i>
+						<i class="fa fa-angle-right next1"></i>
+						
+						<div class="product-wrapper" id="slideshow1">
+							{% if mob %}
+                            {% for smartphone in mob %}
+							<div class="product">
+	                            
+								<div class="slider-item" onclick="location.href='/gadget/smartphonedetail/{{ smartphone.id }}'">
+									<div class="item-img">
+										<img src="{{ smartphone.image.url }}"/>
+									</div>
+									
+									<div class="title">{{ smartphone.name }}</div>
+									<div class="price">{{ smartphone.price }}</div>
+									
+								</div>
+														
+							</div>
+	                        {% endfor %}
+							{% endif %}	
+							
+								
+	
+						</div>
+
+					</div>
+					
+					<!-- second one
+					<div class="row" style="margin-top:40px;">
+						<div class="col-md-12">
+							<div class="product-slider">
+								<h5 class="slider-title">Popularity</h5><h4>Click to see some popular items</h4>
+								<i class="fa fa-angle-left prev2"></i>
+								<i class="fa fa-angle-right next2"></i>
+								
+								<div class="product-wrapper" id="slideshow2">
+									{% if smartphone_list %}
+									{% for smartphone in smartphone_list %}
+									<div class="product">
+
+			
+										<div class="slider-item" onclick="location.href='/gadget/smartphonedetail/{{ smartphone.id }}'">
+											<div class="item-img">
+												<img src="{{ smartphone.image.url }}" />
+											</div>
+											
+											<div class="title">{{ smartphone.name }}</div>
+											<div class="price">{{ smartphone.price }}</div>
+										</div>
+																		
+									</div>
+			                        {% endfor %}
+							        {% endif %}	
+									
+					
+								</div>
+		
+							</div>
+
+								
+						</div>
+
+						
+					</div>-->
+					<!-- third one-->
+
+					<!--<div class="row" style="margin-top:40px;">
+						<div class="col-md-12">
+							<div class="product-slider">
+								<h5 class="slider-title">Recently Added</h5>
+								<i class="fa fa-angle-left prev3"></i>
+								<i class="fa fa-angle-right next3"></i>
+								
+								<div class="product-wrapper" id="slideshow3">
+									{% for smartphone in smartphone %}
+									<div class="product">
+			
+										<div class="slider-item" onclick="location.href='/gadget/smartphonedetail/{{ smartphone.id }}'">
+											<div class="item-img">
+												<img src="{{ smartphone.image.url }}" />
+											</div>
+											
+											<div class="title">{{ smartphone.name }}</div>
+											<div class="price">{{ smartphone.price }}</div>
+										</div>
+																		
+									</div>
+			                        {% endfor %}
+			
+									
+										
+			
+								</div>
+		
+							</div>
+
+								
+						</div>
+
+						
+					</div>-->
+
+					<!-- fourth one-->
+					<!--<div class="row" style="margin-top:40px;">
+						<div class="col-md-12">
+							<div class="product-slider">
+								<h5 class="slider-title">Featured</h5>
+								<i class="fa fa-angle-left prev4"></i>
+								<i class="fa fa-angle-right next4"></i>
+								
+								<div class="product-wrapper" id="slideshow4">
+		                            {% if smartphone1 %}
+									{% for smartphone in smartphone1 %}
+									<div class="product">
+			
+										<div class="slider-item" onclick="location.href='/gadget/smartphonedetail/{{ smartphone.id }}'">
+											<div class="item-img">
+												<img src="{{ smartphone.image.url }}" />
+											</div>
+											
+											<div class="title">{{ smartphone.name }}</div>
+											<div class="price">{{ smartphone.price }}</div>
+										</div>
+																		
+									</div>
+			                        {% endfor %}
+									{% endif %}
+									
+								</div>
+		
+							</div>
+
+								
+						</div>
+
+						
+					</div>-->
+
+					<!--fifth one-->
+					<!--<div class="row" style="margin-top:40px;">
+						<div class="col-md-12">
+							<div class="product-slider">
+								<h5 class="slider-title">Buyer's Guide</h5>
+								<i class="fa fa-angle-left prev5"></i>
+								<i class="fa fa-angle-right next5"></i>
+								
+								<div class="product-wrapper" id="slideshow5">
+		
+									{% for smartphone in smartphone %}
+									<div class="product">
+			
+										<div class="slider-item" onclick="location.href='/gadget/smartphonedetail/{{ smartphone.id }}'">
+											<div class="item-img">
+												<img src="{{ smartphone.image.url }}" />
+											</div>
+											
+											<div class="title">{{ smartphone.name }}</div>
+											<div class="price">{{ smartphone.price }}</div>
+										</div>
+																		
+									</div>
+			                        {% endfor %}
+								</div>
+							</div>
+
+								
+						</div>
+
+						
+					</div>
+
+
+
+					
+				</div>  -->
+				<!--OPTIONS LIST ENDS-->
+
+			</div>
+		</div>
+			
+		
+	
+	</div> 
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block scripts %}
+
+
+
+<!-- slick -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+
+<script src="{% static 'js/test.js' %}"></script>
+{% endblock %}
